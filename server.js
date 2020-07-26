@@ -2,6 +2,8 @@
 const express = require('express');
 // cache json data in local const
 const { animals } = require('./data/animals');
+// use heroku environment variable for deployment, or 3001 for developing
+const PORT = process.env.PORT || 3001;
 // instantiate app
 const app = express();
 
@@ -55,6 +57,6 @@ app.get('/api/animals', (req, res) => {
   res.json(results);
 });
 
-app.listen(3001, () => {
+app.listen(PORT, () => {
 	console.log(`API server now on port 3001!`);
 });
