@@ -14,6 +14,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+// middleware to make static assets readily available, not gated behind a server endpoint
+app.use(express.static('public'));
 
 // take in req.query as an argument when it is called in the '/api/animals' route (if there are query params in the client request) and filter through the animals accordingly, returning the new filtered array
 function filterByQuery(query, animalsArray) {
@@ -130,7 +132,18 @@ app.post('/api/animals', (req, res) => {
   }
 })
 
+// serve index.html -- homepage
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
+app.get('/animals', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/animals.html'));
+})
+
+app.get('/zookeepers', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+})
 
 
 
