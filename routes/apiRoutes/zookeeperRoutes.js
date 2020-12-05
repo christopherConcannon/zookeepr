@@ -20,7 +20,7 @@ router.get('/zookeepers', (req, res) => {
 });
 
 // retrieve individual zookeeper by id
-router.get('zookeepers/:id', (req, res) => {
+router.get('/zookeepers/:id', (req, res) => {
 	const result = findById(req.params.id, zookeepers);
 	if (result) {
 		res.json(result);

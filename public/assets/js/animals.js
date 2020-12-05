@@ -1,6 +1,7 @@
 const $animalForm = document.querySelector('#animals-form');
 const $displayArea = document.querySelector('#display-area');
 
+// loop over array of animals sent back from server and output card for each
 const printResults = resultArr => {
   console.log(resultArr);
 
@@ -22,6 +23,7 @@ const printResults = resultArr => {
   $displayArea.innerHTML = animalHTML.join('');
 };
 
+// make http request to api/animals route, passing in query params if extant
 const getAnimals = (formData = {}) => {
   let queryUrl = '/api/animals?';
 
@@ -38,6 +40,7 @@ const getAnimals = (formData = {}) => {
       if (!response.ok) {
         return alert('Error: ' + response.statusText);
       }
+      // data returned from within api/animals route...res.json(results);
       return response.json();
     })
     .then(animalData => {
@@ -47,6 +50,7 @@ const getAnimals = (formData = {}) => {
 
 };
 
+// package up form data to send in http request
 const handleGetAnimalsSubmit = event => {
   event.preventDefault();
   const dietRadioHTML = $animalForm.querySelectorAll('[name="diet"]');
